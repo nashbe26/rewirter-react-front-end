@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { rewriterFunc } from "../../../api/rewriter.api";
 import { setToken } from "../../../redux/loggedSlice";
 import { fetchLang } from "../../../redux/modeSlice";
-import { isRewriteLoading, rewriteData } from "../../../redux/rewriteLoadingSlice";
+import { isRewriteLoading, rewriteData, setPremPack } from "../../../redux/rewriteLoadingSlice";
 import '../style.css'
 
 
@@ -53,6 +53,9 @@ const LeftBoxText = () =>{
             if(typed.length<=100){
                 setfinalText(typed)
     
+                dispatch(setPremPack(false))
+            }else{
+                dispatch(setPremPack(true))
             }
         }else{
             if(typed.length<=2000){
@@ -89,10 +92,12 @@ const LeftBoxText = () =>{
             <div className="button-section">
                 <div className="button-box">
                     <select name="" className="select-lang" onChange={e => setlang(e.target.value)}>
-                        <option value="en" ><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> English</option>
-                        <option value="fr"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> French</option>
-                        <option value="es"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Spanish </option>
-                        <option value="pt"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Portuguese</option>
+                        <option value="english" ><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> English</option>
+                        <option value="french"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> French</option>
+                        <option value="spanish"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Spanish </option>
+                        <option value="portuguese"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Portuguese</option>
+                        <option value="arabic"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Arabic</option>
+                        <option value="turkish"><span style={{color:"rgba(14, 36, 58, 0.26)!important"}}>Language :</span> Turkish</option>
                     </select>
                     <div className="">
                         {token ?  <p>{finalText.length}/2000</p> : <p>{finalText.length}/100</p> }

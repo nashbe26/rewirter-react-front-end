@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { rewriterFunc } from "../../api/rewriter.api";
 import modeSlice, { fetchLang, fetchMode } from "../../redux/modeSlice";
 import LeftBoxText from "./left-text/left-text";
@@ -13,6 +14,8 @@ const TextBox = ()=>{
     const [mode,setMode] = useState(null)
     const [lang,setlang] = useState(null)
     let dispatch = useDispatch()
+
+    let {premPack} = useSelector(state => state.rewriteStatus)
 
     function setModeFun(modes,i){
         let lists = document.querySelectorAll('.navbar-items-text')
@@ -55,10 +58,10 @@ const TextBox = ()=>{
 
                                 <ul className="list-choice-tone">
                                     <li className="navbar-items-text-desc" >Tone: </li>
-                                    <li className="navbar-items-text" onClick={e=> setModeFun('normal',0)}>Neutral</li>
-                                    <li className="navbar-items-text" onClick={e=> setModeFun('creative',1)}>Curious</li>
-                                    <li className="navbar-items-text" onClick={e=> setModeFun('fluent',2)}>Encourging</li>
-                                    <li className="navbar-items-text" onClick={e=> setModeFun('creative',3)}>Formal</li>
+                                    <li className="navbar-items-text" onClick={e=> setModeFun('neutral',0)}>Neutral</li>
+                                    <li className="navbar-items-text" onClick={e=> setModeFun('curious',1)}>Curious</li>
+                                    <li className="navbar-items-text" onClick={e=> setModeFun('encourging',2)}>Encourging</li>
+                                    <li className="navbar-items-text" onClick={e=> setModeFun('formal',3)}>Formal</li>
                                     <li className="navbar-items-text" onClick={e=> setModeFun('friendly',4)}>Friendly</li>
                                     <li className="navbar-items-text" onClick={e=> setModeFun('informal',5)}>Informal</li>
                                     <li className="navbar-items-text" onClick={e=> setModeFun('surprised',6)}>Surprised</li>
@@ -69,6 +72,17 @@ const TextBox = ()=>{
                                 <p className="love-text">Love the tool ? <span className="love-text-green">Rate Us</span></p>
                             </div>
                         </div>
+                        <div className="row d-flex mx-1">
+                            <div className="col-12">
+                                {premPack ? 
+                                    <div className="alert alert-warning">
+                                       <p><i class="fa-solid fa-right-to-bracket me-2"> </i> <Link to='/register'>Register for free</Link> to get access to 2000 characters</p> 
+                                    </div>
+                                    :
+                                    <></>
+                                }
+                            </div>
+                        </div>
                         <div className="navbar-box-text-mb">
                             <div className="list-chice-box-mb">
                                 <div className="btn-select-type-lang">
@@ -76,10 +90,12 @@ const TextBox = ()=>{
                                     <i class="fa-solid fa-angle-down"></i>
                                     </div>
                                     <select name="" className="type-btn" onChange={e => setlang(e.target.value)}>
-                                        <option value="en">English</option>
-                                        <option value="fr">French</option>
-                                        <option value="es">Spanish </option>
-                                        <option value="pt">Portuguese</option>
+                                    <option value="english" >English</option>
+                                    <option value="french">French</option>
+                                    <option value="spanish">Spanish </option>
+                                    <option value="portuguese">Portuguese</option>
+                                    <option value="arabic">Arabic</option>
+                                    <option value="turkish">Turkish</option>
                                     </select>
                                 </div>
                                 <div className="btn-select-type-lang">
@@ -87,10 +103,10 @@ const TextBox = ()=>{
                                     <i class="fa-solid fa-angle-down"></i>
                                     </div>
                                     <select name="" className="type-btn" onChange={e => setMode(e.target.value)}>
-                                    <option value='normal'>Neutral</option>
-                                    <option value='creative'>Curious</option>
-                                    <option value='fluent'>Encourging</option>
-                                    <option value='creative'>Formal</option>
+                                    <option value='neutral'>Neutral</option>
+                                    <option value='curious'>Curious</option>
+                                    <option value='encourging'>Encourging</option>
+                                    <option value='formal'>Formal</option>
                                     <option value='friendly'>Friendly</option>
                                     <option value='informal'>Informal</option>
                                     <option value='surprised'>Surprised</option>

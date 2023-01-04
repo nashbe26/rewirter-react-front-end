@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     status:"waiting" | "succeeded" | "fetching",
-    text:null
+    text:null,
+    premPack:false
 }
 
 export const rewriteStatusSlice = createSlice({
@@ -16,10 +17,15 @@ export const rewriteStatusSlice = createSlice({
         rewriteData:(state,{payload})=>{
             console.log(payload);
             state.text = payload
+        },
+        setPremPack:(state,{payload})=>{
+            console.log(payload);
+            state.premPack = payload
         }
     }
+    
 });
 
-export const {isRewriteLoading,rewriteData} = rewriteStatusSlice.actions;
+export const {isRewriteLoading,rewriteData,setPremPack} = rewriteStatusSlice.actions;
 
 export default rewriteStatusSlice.reducer;
